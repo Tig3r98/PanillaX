@@ -181,10 +181,11 @@ public class PanillaPlugin extends JavaPlugin implements IPanilla {
             case 4325: //1.21.5
             case 4435: //1.21.6
             case 4438: //1.21.7
+            case 4440: //1.21.8
                 initLatest();
                 break;
             default:
-                getLogger().warning("Unknown server implementation: " + Bukkit.getVersion() + " (data version "+Bukkit.getUnsafe().getDataVersion()+") is not supported by Panilla. Using latest implementation; may not work.");
+                getLogger().warning("Unknown server implementation: " + Bukkit.getVersion() + " (data version "+Bukkit.getUnsafe().getDataVersion()+") is not supported by PanillaX. Using latest implementation; may not work.");
                 initLatest();
         }
     }
