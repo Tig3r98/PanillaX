@@ -28,10 +28,11 @@ With this software, you will be able to prevent:
 **PanillaX is provided as-is, with no guarantees. At the moment, it just adds compatibility for newer versions to old checks.**
 
 Currently PanillaX supports:
-- Paper 1.21.4 (2.1.0 recommended)
+- Paper 1.21.4
 - Paper 1.21.5
 - Paper 1.21.6
 - Paper 1.21.7
+- Paper 1.21.8
 
 **This fork does NOT support CraftBukkit/Spigot**. It supports Paper derivatives (Purpur, etc.) including Folia. 
 
