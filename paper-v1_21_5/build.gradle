@@ -1,11 +1,11 @@
 plugins {
-    id("io.papermc.paperweight.userdev") version "2.0.0-beta.17"
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.19"
 }
 
 dependencies {
     compileOnly project(':panillax-api')
     paperweight.paperDevBundle("1.21.5-R0.1-SNAPSHOT")
-    implementation 'de.tr7zw:item-nbt-api:2.15.3'
+    implementation 'de.tr7zw:item-nbt-api:2.15.5'
 }
 
 java {

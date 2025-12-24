@@ -1,6 +1,6 @@
 allprojects {
     group = 'com.ruinscraft'
-    version = '1.0.2'
+    version = '1.0.3'
 }
 
 subprojects {
@@ -13,11 +13,8 @@ subprojects {
             url 'https://repo.codemc.io/repository/maven-public/'
         }
     }
-
-    sourceCompatibility = JavaVersion.VERSION_21
-    targetCompatibility = JavaVersion.VERSION_21
 }
 
-task clean {
+tasks.register('clean') {
     delete './target'
 }

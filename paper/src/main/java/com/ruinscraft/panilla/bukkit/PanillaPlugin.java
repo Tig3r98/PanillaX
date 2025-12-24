@@ -184,6 +184,7 @@ public class PanillaPlugin extends JavaPlugin implements IPanilla {
             case 4440: //1.21.8
             case 4554: //1.21.9
             case 4556: //1.21.10
+            case 4671: //1.21.11
                 initLatest();
                 break;
             default:
