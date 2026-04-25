@@ -1,4 +1,4 @@
-package com.ruinscraft.panilla.paper.v1_21_5.io;
+package com.ruinscraft.panilla.paper.v1_21_11.io;
 
 import com.ruinscraft.panilla.api.IPanilla;
 import com.ruinscraft.panilla.api.IPanillaPlayer;
@@ -9,7 +9,7 @@ import com.ruinscraft.panilla.api.exception.NbtNotPermittedException;
 import com.ruinscraft.panilla.api.io.IPacketInspector;
 import com.ruinscraft.panilla.api.nbt.INbtTagCompound;
 import com.ruinscraft.panilla.api.nbt.checks.NbtChecks;
-import com.ruinscraft.panilla.paper.v1_21_5.nbt.NbtTagCompound;
+import com.ruinscraft.panilla.paper.v1_21_11.nbt.NbtTagCompound;
 import de.tr7zw.changeme.nbtapi.NBT;
 import net.minecraft.core.component.TypedDataComponent;
 import net.minecraft.network.protocol.game.*;

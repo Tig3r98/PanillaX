@@ -1,4 +1,4 @@
-package com.ruinscraft.panilla.paper.v1_21_4.nbt;
+package com.ruinscraft.panilla.paper.v1_21_11.nbt;
 
 import com.ruinscraft.panilla.api.nbt.INbtTagCompound;
 import com.ruinscraft.panilla.api.nbt.INbtTagList;

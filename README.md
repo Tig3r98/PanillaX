@@ -27,7 +27,7 @@ With this software, you will be able to prevent:
 
 **PanillaX is provided as-is, with no guarantees. At the moment, it just adds compatibility for newer versions to old checks. Thus, it could cause issues. Please report them if you find any. **
 
-Currently, PanillaX supports Paper 1.21.4 to 1.21.10
+For supported versions, check the release info.
 
 **This fork does NOT support CraftBukkit/Spigot**. It supports Paper derivatives (Purpur, etc.) including Folia. 
 
@@ -43,4 +43,4 @@ Currently, PanillaX supports Paper 1.21.4 to 1.21.10
 This fork uses Paperweight, so you won't need to compile Spigot or Paper beforehand.
 You can compile the project with the shadowJar task or by running `./gradlew build`. The output plugin jars file will located in the `target/` directory.
 
-Java 21 is required to build PanillaX.
+Java 25 is required to build PanillaX.

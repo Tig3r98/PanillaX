@@ -1,0 +1,24 @@
+plugins {
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.21"
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'papermc'
+        url = 'https://repo.papermc.io/repository/maven-public/'
+    }
+}
+
+dependencies {
+    compileOnly project(':panillax-api')
+    paperweight.paperDevBundle("1.21.11-R0.1-SNAPSHOT")
+    implementation 'net.kyori:adventure-text-serializer-ansi:4.17.0' //required for building .11
+    implementation 'de.tr7zw:item-nbt-api:2.15.7'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
