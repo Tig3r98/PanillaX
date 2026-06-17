@@ -13,8 +13,8 @@ repositories {
 
 dependencies {
     implementation project(':panillax-api')
-    implementation project(':panillax-paper-v1_21_11')
-    compileOnly 'io.papermc.paper:paper-api:1.21.11-R0.1-SNAPSHOT' //use 1.21.11 Paper API
+    implementation project(':panillax-paper-v26_2')
+    compileOnly 'io.papermc.paper:paper-api:26.2.build.+' //use 26.2 Paper API
     implementation 'org.bstats:bstats-bukkit:3.1.0'
 }
 

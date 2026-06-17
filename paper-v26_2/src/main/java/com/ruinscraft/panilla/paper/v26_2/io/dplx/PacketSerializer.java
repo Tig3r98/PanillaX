@@ -1,4 +1,4 @@
-package com.ruinscraft.panilla.paper.v1_21_11.io.dplx;
+package com.ruinscraft.panilla.paper.v26_2.io.dplx;
 
 import com.ruinscraft.panilla.api.io.IPacketSerializer;
 import io.netty.buffer.ByteBuf;

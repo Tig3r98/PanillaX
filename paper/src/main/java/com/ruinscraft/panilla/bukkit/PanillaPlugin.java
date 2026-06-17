@@ -183,16 +183,16 @@ public class PanillaPlugin extends JavaPlugin implements IPanilla {
     }
 
     private void initLatest(){
-        packetSerializerClass = com.ruinscraft.panilla.paper.v1_21_11.io.dplx.PacketSerializer.class;
+        packetSerializerClass = com.ruinscraft.panilla.paper.v26_2.io.dplx.PacketSerializer.class;
         protocolConstants = new IProtocolConstants() {
             @Override
             public int maxBookPages() {
                 return 100;
             }
         };
-        playerInjector = new com.ruinscraft.panilla.paper.v1_21_11.io.PlayerInjector();
-        packetInspector = new com.ruinscraft.panilla.paper.v1_21_11.io.PacketInspector(this);
-        containerCleaner = new com.ruinscraft.panilla.paper.v1_21_11.InventoryCleaner(this);
+        playerInjector = new com.ruinscraft.panilla.paper.v26_2.io.PlayerInjector();
+        packetInspector = new com.ruinscraft.panilla.paper.v26_2.io.PacketInspector(this);
+        containerCleaner = new com.ruinscraft.panilla.paper.v26_2.InventoryCleaner(this);
     }
 
     @Override
