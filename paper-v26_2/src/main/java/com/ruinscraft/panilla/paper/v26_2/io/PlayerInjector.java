@@ -1,4 +1,4 @@
-package com.ruinscraft.panilla.paper.v1_21_11.io;
+package com.ruinscraft.panilla.paper.v26_2.io;
 
 import com.ruinscraft.panilla.api.IPanillaPlayer;
 import com.ruinscraft.panilla.api.io.IPlayerInjector;

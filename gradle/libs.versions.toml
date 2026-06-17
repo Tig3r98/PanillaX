@@ -1,0 +1,21 @@
+[versions]
+paper-api = "26.2+"
+bstats = "3.1.0"
+nbtapi = "2.15.7"
+kyori-serializer = "5.1.1"
+netty = "4.2.15.Final"
+gson = "2.14.0"
+
+# build-logic
+shadow = "9.3.0"
+paperweight-userdev = "2.0.0-beta.21"
+
+[libraries]
+paper-api = { module = "io.papermc.paper:paper-api", version.ref = "paper-api" }
+bstats = { module = "org.bstats:bstats-bukkit", version.ref = "bstats" }
+nbtapi = { module = "de.tr7zw:item-nbt-api", version.ref = "nbtapi" }
+kyori-serializer-ansi = { module = "net.kyori:adventure-text-serializer-ansi", version.ref = "kyori-serializer" }
+netty-all = { module = "io.netty:netty-all", version.ref = "netty" }
+gson = { module = "com.google.code.gson:gson", version.ref = "gson" }
+
+[plugins]

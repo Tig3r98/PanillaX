@@ -1,0 +1,23 @@
+pluginManagement {
+    includeBuild("build-logic")
+}
+
+plugins {
+    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
+}
+
+rootProject.name = "PanillaX"
+
+// api
+include(":panillax-api")
+
+// paper
+include(":panillax-paper-v26_2")
+include(":panillax-paper")
+
+// api
+project(":panillax-api").projectDir = file("api")
+
+// paper
+project(":panillax-paper-v26_2").projectDir = file("paper-v26_2")
+project(":panillax-paper").projectDir = file("paper")

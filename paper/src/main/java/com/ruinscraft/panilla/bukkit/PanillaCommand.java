@@ -1,14 +1,13 @@
 package com.ruinscraft.panilla.bukkit;
 
+import java.util.ArrayList;
+import java.util.List;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.plugin.Plugin;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PanillaCommand implements CommandExecutor {
 
@@ -21,7 +20,9 @@ public class PanillaCommand implements CommandExecutor {
     private boolean showInfo(CommandSender sender) {
         String version = panillaPlugin.getDescription().getVersion();
         List<String> authors = panillaPlugin.getDescription().getAuthors();
-        sender.sendMessage(ChatColor.GOLD + "Running PanillaX version " + version + " by " + String.join(", ", authors));
+        sender.sendMessage(
+            ChatColor.GOLD + "Running PanillaX version " + version + " by " + String.join(", ",
+                authors));
         return true;
     }
 
@@ -55,6 +56,14 @@ public class PanillaCommand implements CommandExecutor {
         } else if (args[0].equalsIgnoreCase("debug")) {
             if (sender.hasPermission("panilla.command.debug")) {
                 return showDebug(sender);
+            } else {
+                sender.sendMessage(noPerm);
+            }
+        } else if (args[0].equalsIgnoreCase("reload")) {
+            if (sender.hasPermission("panilla.command.reload")) {
+                panillaPlugin.loadConfig();
+                sender.sendMessage(ChatColor.GREEN + "PanillaX configuration reloaded.");
+                return true;
             } else {
                 sender.sendMessage(noPerm);
             }
