@@ -1,12 +1,20 @@
 package com.ruinscraft.panilla.bukkit;
 
-import com.ruinscraft.panilla.api.*;
+import com.ruinscraft.panilla.api.IEnchantments;
+import com.ruinscraft.panilla.api.IInventoryCleaner;
+import com.ruinscraft.panilla.api.IPanilla;
+import com.ruinscraft.panilla.api.IPanillaLogger;
+import com.ruinscraft.panilla.api.IProtocolConstants;
 import com.ruinscraft.panilla.api.config.PConfig;
 import com.ruinscraft.panilla.api.config.PStrictness;
 import com.ruinscraft.panilla.api.config.PTranslations;
 import com.ruinscraft.panilla.api.io.IPacketInspector;
 import com.ruinscraft.panilla.api.io.IPacketSerializer;
 import com.ruinscraft.panilla.api.io.IPlayerInjector;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.HashMap;
+import java.util.Map;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -14,11 +22,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.jetbrains.annotations.NotNull;
-
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PanillaPlugin extends JavaPlugin implements IPanilla {
 
@@ -78,7 +81,8 @@ public class PanillaPlugin extends JavaPlugin implements IPanilla {
     @Override
     public IPacketSerializer createPacketSerializer(Object byteBuf) {
         try {
-            return (IPacketSerializer) packetSerializerClass.getConstructors()[0].newInstance(byteBuf);
+            return (IPacketSerializer) packetSerializerClass.getConstructors()[0].newInstance(
+                byteBuf);
         } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
             e.printStackTrace();
         }
@@ -91,7 +95,7 @@ public class PanillaPlugin extends JavaPlugin implements IPanilla {
         getServer().getScheduler().runTask(this, runnable);
     }
 
-    private synchronized void loadConfig() {
+    public synchronized void loadConfig() {
         saveDefaultConfig();
 
         pConfig = new BukkitPConfig();
@@ -99,20 +103,30 @@ public class PanillaPlugin extends JavaPlugin implements IPanilla {
         pConfig.language = getConfig().getString("language", pConfig.language);
         pConfig.consoleLogging = getConfig().getBoolean("logging.console", pConfig.consoleLogging);
         pConfig.chatLogging = getConfig().getBoolean("logging.chat", pConfig.chatLogging);
-        pConfig.strictness = PStrictness.valueOf(getConfig().getString("strictness", pConfig.strictness.name()).toUpperCase());
-        pConfig.preventMinecraftEducationSkulls = getConfig().getBoolean("prevent-minecraft-education-skulls", pConfig.preventMinecraftEducationSkulls);
-        pConfig.preventFaweBrushNbt = getConfig().getBoolean("prevent-fawe-brush-nbt", pConfig.preventFaweBrushNbt);
-        pConfig.ignoreNonPlayerInventories = getConfig().getBoolean("ignore-non-player-inventories", pConfig.ignoreNonPlayerInventories);
-        pConfig.noBlockEntityTag = getConfig().getBoolean("no-block-entity-tag", pConfig.noBlockEntityTag);
+        pConfig.strictness = PStrictness.valueOf(
+            getConfig().getString("strictness", pConfig.strictness.name()).toUpperCase());
+        pConfig.preventMinecraftEducationSkulls = getConfig().getBoolean(
+            "prevent-minecraft-education-skulls", pConfig.preventMinecraftEducationSkulls);
+        pConfig.preventFaweBrushNbt = getConfig().getBoolean("prevent-fawe-brush-nbt",
+            pConfig.preventFaweBrushNbt);
+        pConfig.ignoreNonPlayerInventories = getConfig().getBoolean("ignore-non-player-inventories",
+            pConfig.ignoreNonPlayerInventories);
+        pConfig.noBlockEntityTag = getConfig().getBoolean("no-block-entity-tag",
+            pConfig.noBlockEntityTag);
         pConfig.nbtWhitelist = getConfig().getStringList("nbt-whitelist");
         pConfig.disabledWorlds = getConfig().getStringList("disabled-worlds");
-        pConfig.maxNonMinecraftNbtKeys = getConfig().getInt("max-non-minecraft-nbt-keys", pConfig.maxNonMinecraftNbtKeys);
-        pConfig.overrideMinecraftMaxEnchantmentLevels = getConfig().getBoolean("max-enchantment-levels.override-minecraft-max-enchantment-levels", pConfig.overrideMinecraftMaxEnchantmentLevels);
+        pConfig.maxNonMinecraftNbtKeys = getConfig().getInt("max-non-minecraft-nbt-keys",
+            pConfig.maxNonMinecraftNbtKeys);
+        pConfig.overrideMinecraftMaxEnchantmentLevels = getConfig().getBoolean(
+            "max-enchantment-levels.override-minecraft-max-enchantment-levels",
+            pConfig.overrideMinecraftMaxEnchantmentLevels);
 
         Map<String, Integer> enchantmentOverrides = new HashMap<>();
 
-        for (String enchantmentOverride : getConfig().getConfigurationSection("max-enchantment-levels.overrides").getKeys(false)) {
-            int level = getConfig().getInt("max-enchantment-levels.overrides." + enchantmentOverride);
+        for (String enchantmentOverride : getConfig().getConfigurationSection(
+            "max-enchantment-levels.overrides").getKeys(false)) {
+            int level = getConfig().getInt(
+                "max-enchantment-levels.overrides." + enchantmentOverride);
             enchantmentOverrides.put(enchantmentOverride, level);
         }
 
@@ -123,7 +137,8 @@ public class PanillaPlugin extends JavaPlugin implements IPanilla {
         try {
             pTranslations = PTranslations.get(languageKey);
         } catch (IOException e) {
-            getPanillaLogger().warning("Could not load language translations for " + languageKey, false);
+            getPanillaLogger().warning("Could not load language translations for " + languageKey,
+                false);
         }
     }
 
@@ -145,7 +160,8 @@ public class PanillaPlugin extends JavaPlugin implements IPanilla {
         PanillaCommand panillaCommand = new PanillaCommand(this);
         Bukkit.getCommandMap().register("panilla", new Command("panilla") {
             @Override
-            public boolean execute(@NotNull CommandSender commandSender, @NotNull String s, @NotNull String @NotNull [] strings) {
+            public boolean execute(@NotNull CommandSender commandSender, @NotNull String s,
+                @NotNull String @NotNull [] strings) {
                 return panillaCommand.onCommand(commandSender, this, s, strings);
             }
         });
@@ -166,23 +182,27 @@ public class PanillaPlugin extends JavaPlugin implements IPanilla {
     @SuppressWarnings("deprecation")
     private void initVersion() {
         //check Java
-        if(Runtime.version().feature() < 25) {
-            getLogger().severe("PanillaX only supports Java 25. Please update to Java 25 if your server software supports it, upgrade your server version or simply use an older Panilla version.");
+        if (Runtime.version().feature() < 25) {
+            getLogger().severe(
+                "PanillaX only supports Java 25. Please update to Java 25 if your server software supports it, upgrade your server version or simply use an older Panilla version.");
             Bukkit.shutdown();
         }
         //init data-specific classes
         switch (Bukkit.getUnsafe().getDataVersion()) {
             case 4671: //1.21.11
-            case 4790: //  26.1.2
+            case 4903: //  26.1.2
                 initLatest();
                 break;
             default:
-                getLogger().warning("Unknown server implementation: " + Bukkit.getVersion() + " (data version "+Bukkit.getUnsafe().getDataVersion()+") is not supported by PanillaX. Using latest implementation; may not work.");
+                getLogger().warning(
+                    "Unknown server implementation: " + Bukkit.getVersion() + " (data version "
+                        + Bukkit.getUnsafe().getDataVersion()
+                        + ") is not supported by PanillaX. Using latest implementation; may not work.");
                 initLatest();
         }
     }
 
-    private void initLatest(){
+    private void initLatest() {
         packetSerializerClass = com.ruinscraft.panilla.paper.v26_2.io.dplx.PacketSerializer.class;
         protocolConstants = new IProtocolConstants() {
             @Override
