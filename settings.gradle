@@ -9,6 +9,7 @@ include(':panillax-api')
 
 // paper
 include(':panillax-paper-v1_21_11')
+include(':panillax-paper-v26_3')
 include(':panillax-paper')
 
 // api
@@ -16,5 +17,7 @@ project(':panillax-api').projectDir = file('api')
 
 // paper
 project(':panillax-paper-v1_21_11').projectDir = file('paper-v1_21_11')
+project(':panillax-paper-v26_3').projectDir = file('paper-v26_3')
 project(':panillax-paper').projectDir = file('paper')
 include 'panillax-paper-v1_21_11'
+include 'panillax-paper-v26_3'

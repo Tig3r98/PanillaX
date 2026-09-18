@@ -7,6 +7,10 @@ import com.ruinscraft.panilla.api.config.PTranslations;
 import com.ruinscraft.panilla.api.io.IPacketInspector;
 import com.ruinscraft.panilla.api.io.IPacketSerializer;
 import com.ruinscraft.panilla.api.io.IPlayerInjector;
+import com.ruinscraft.panilla.paper.v26_3.InventoryCleaner;
+import com.ruinscraft.panilla.paper.v26_3.io.PacketInspector;
+import com.ruinscraft.panilla.paper.v26_3.io.PlayerInjector;
+import com.ruinscraft.panilla.paper.v26_3.io.dplx.PacketSerializer;
 import org.bstats.bukkit.Metrics;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -173,7 +177,20 @@ public class PanillaPlugin extends JavaPlugin implements IPanilla {
         //init data-specific classes
         switch (Bukkit.getUnsafe().getDataVersion()) {
             case 4671: //1.21.11
-            case 4790: //  26.1.2
+            case 4790: //26.1.2
+            case 4093: //26.2
+                packetSerializerClass = PacketSerializer.class;
+                protocolConstants = new IProtocolConstants() {
+                    @Override
+                    public int maxBookPages() {
+                        return 100;
+                    }
+                };
+                playerInjector = new PlayerInjector();
+                packetInspector = new PacketInspector(this);
+                containerCleaner = new InventoryCleaner(this);
+                break;
+            case 5023: //26.3
                 initLatest();
                 break;
             default:
@@ -183,16 +200,16 @@ public class PanillaPlugin extends JavaPlugin implements IPanilla {
     }
 
     private void initLatest(){
-        packetSerializerClass = com.ruinscraft.panilla.paper.v1_21_11.io.dplx.PacketSerializer.class;
+        packetSerializerClass = com.ruinscraft.panilla.paper.v26_3.io.dplx.PacketSerializer.class;
         protocolConstants = new IProtocolConstants() {
             @Override
             public int maxBookPages() {
                 return 100;
             }
         };
-        playerInjector = new com.ruinscraft.panilla.paper.v1_21_11.io.PlayerInjector();
-        packetInspector = new com.ruinscraft.panilla.paper.v1_21_11.io.PacketInspector(this);
-        containerCleaner = new com.ruinscraft.panilla.paper.v1_21_11.InventoryCleaner(this);
+        playerInjector = new com.ruinscraft.panilla.paper.v26_3.io.PlayerInjector();
+        packetInspector = new com.ruinscraft.panilla.paper.v26_3.io.PacketInspector(this);
+        containerCleaner = new com.ruinscraft.panilla.paper.v26_3.InventoryCleaner(this);
     }
 
     @Override

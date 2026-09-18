@@ -1,0 +1,23 @@
+plugins {
+    id("io.papermc.paperweight.userdev") version "2.0.0-beta.23"
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'papermc'
+        url = 'https://repo.papermc.io/repository/maven-public/'
+    }
+}
+
+dependencies {
+    compileOnly project(':panillax-api')
+    paperweight.paperDevBundle("26.3.build.+")
+    implementation 'de.tr7zw:item-nbt-api:2.16.1'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(25)
+    }
+}
